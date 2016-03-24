@@ -11,5 +11,5 @@ momentum: 0.9
 max_iter: 10000
 weight_decay: 0.0005
 snapshot: 1000
-snapshot_prefix: "/home/ubuntu/data/DL8803/SegNet/Models/Training/segnet_basic"  	# Change this to the absolute path to where you wish to output solver snapshots
+snapshot_prefix: "/home/ubuntu/data/SegNet/Models/Training/segnet_basic"  	# Change this to the absolute path to where you wish to output solver snapshots
 solver_mode: GPU
