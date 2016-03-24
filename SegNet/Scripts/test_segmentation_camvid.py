@@ -7,7 +7,6 @@ import argparse
 import math
 import pylab
 from sklearn.preprocessing import normalize
-from sklearn.metrics import jaccard_similarity_score
 caffe_root = '/home/sahbi/Projects/SegNet/caffe-segnet/' 			# Change this to the absolute directoy to SegNet Caffe
 import sys
 sys.path.insert(0, caffe_root + 'python')
@@ -27,7 +26,6 @@ net = caffe.Net(args.model,
                 args.weights,
                 caffe.TEST)
 
-scores=[]
 
 for i in range(0, args.iter):
 
@@ -49,11 +47,22 @@ for i in range(0, args.iter):
 	g_gt = label.copy()
 	b_gt = label.copy()
 
-	Skin = [0,0,0]
-	Lesion = [255,255,255]
+	Sky = [128,128,128]
+	Building = [128,0,0]
+	Pole = [192,192,128]
+	Road_marking = [255,69,0]
+	Road = [128,64,128]
+	Pavement = [60,40,222]
+	Tree = [128,128,0]
+	SignSymbol = [192,128,128]
+	Fence = [64,64,128]
+	Car = [64,0,128]
+	Pedestrian = [64,64,0]
+	Bicyclist = [0,128,192]
+	Unlabelled = [0,0,0]
 
-	label_colours = np.array([Skin,Lesion])
-	for l in range(0,2):
+	label_colours = np.array([Sky, Building, Pole, Road, Pavement, Tree, SignSymbol, Fence, Car, Pedestrian, Bicyclist, Unlabelled])
+	for l in range(0,11):
 		r[ind==l] = label_colours[l,0]
 		g[ind==l] = label_colours[l,1]
 		b[ind==l] = label_colours[l,2]
@@ -76,7 +85,7 @@ for i in range(0, args.iter):
 	output = np.transpose(output, (1,2,0))
 	image = image[:,:,(2,1,0)]
 
-	# print image.shape,rgb_gt.shape,rgb.shape
+	print image.shape,rgb_gt.shape,rgb.shape
 	#scipy.misc.toimage(rgb, cmin=0.0, cmax=255).save(IMAGE_FILE+'_segnet.png')
 
 	plt.figure()
@@ -87,13 +96,6 @@ for i in range(0, args.iter):
 	plt.imshow(rgb,vmin=0, vmax=1)
 	plt.show()
 
-	y_true = label.flatten()
-	y_pred = ind.flatten()
-
-	score = jaccard_similarity_score(y_true, y_pred)
-	scores.append(score)
-	print "image ",i," score: ",score
-
 
 print 'Success!'
-print "mean accuracy: ",np.array(scores).mean()
+
