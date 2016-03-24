@@ -8,8 +8,8 @@ gamma: 1.0
 stepsize: 10000000
 display: 20
 momentum: 0.9
-max_iter: 300
+max_iter: 2
 weight_decay: 0.001
 snapshot: 1000
 snapshot_prefix: "/home/sahbi/Projects/SegNet/Models/Training/segnet"  	# Change this to the absolute path to where you wish to output solver snapshots
-solver_mode: GPU
+solver_mode: CPU
