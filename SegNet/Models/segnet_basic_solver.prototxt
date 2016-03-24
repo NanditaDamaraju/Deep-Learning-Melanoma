@@ -1,4 +1,4 @@
-net: "/home/ubuntu/data/DL8803/SegNet/Models/segnet_basic_train.prototxt"  		# Change this to the absolute path to your model file
+net: "/home/ubuntu/DL8803/SegNet/Models/segnet_basic_train.prototxt"  		# Change this to the absolute path to your model file
 test_initialization: false
 test_iter: 1
 test_interval: 10000000
