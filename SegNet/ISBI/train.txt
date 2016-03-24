@@ -1,0 +1,9 @@
+/home/sahbi/Projects/SegNet/ISBI/train/ISIC_0000008.jpg /home/sahbi/Projects/SegNet/ISBI/trainannot/ISIC_0000008_Segmentation.png
+/home/sahbi/Projects/SegNet/ISBI/train/ISIC_0000007.jpg /home/sahbi/Projects/SegNet/ISBI/trainannot/ISIC_0000007_Segmentation.png
+/home/sahbi/Projects/SegNet/ISBI/train/ISIC_0000000.jpg /home/sahbi/Projects/SegNet/ISBI/trainannot/ISIC_0000000_Segmentation.png
+/home/sahbi/Projects/SegNet/ISBI/train/ISIC_0000006.jpg /home/sahbi/Projects/SegNet/ISBI/trainannot/ISIC_0000006_Segmentation.png
+/home/sahbi/Projects/SegNet/ISBI/train/ISIC_0000009.jpg /home/sahbi/Projects/SegNet/ISBI/trainannot/ISIC_0000009_Segmentation.png
+/home/sahbi/Projects/SegNet/ISBI/train/ISIC_0000002.jpg /home/sahbi/Projects/SegNet/ISBI/trainannot/ISIC_0000002_Segmentation.png
+/home/sahbi/Projects/SegNet/ISBI/train/ISIC_0000001.jpg /home/sahbi/Projects/SegNet/ISBI/trainannot/ISIC_0000001_Segmentation.png
+/home/sahbi/Projects/SegNet/ISBI/train/ISIC_0000004.jpg /home/sahbi/Projects/SegNet/ISBI/trainannot/ISIC_0000004_Segmentation.png
+/home/sahbi/Projects/SegNet/ISBI/train/ISIC_0000010.jpg /home/sahbi/Projects/SegNet/ISBI/trainannot/ISIC_0000010_Segmentation.png
