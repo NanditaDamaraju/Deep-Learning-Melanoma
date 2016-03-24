@@ -5,7 +5,7 @@ layer {
   top: "data"
   top: "label"
   dense_image_data_param {
-    source: "/home/ubuntu/data/DL8803/SegNet/CamVid/train.txt"	# Change this to the absolute path to your data file
+    source: "/home/ubuntu/data/SegNet/CamVid/train.txt"	# Change this to the absolute path to your data file
     batch_size: 4   			# Change this number to a batch size that will fit on your GPU
     shuffle: true
   }
