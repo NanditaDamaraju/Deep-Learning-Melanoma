@@ -5,7 +5,7 @@ layer {
   top: "data"
   top: "label"
   dense_image_data_param {
-    source: "/home/sahbi/Projects/SegNet/CamVid/test.txt"	# Change this to the absolute path to your data file
+    source: "/home/ubuntu/data/DL8803/SegNet/CamVid/test.txt"	# Change this to the absolute path to your data file
     batch_size: 1
   }
 }

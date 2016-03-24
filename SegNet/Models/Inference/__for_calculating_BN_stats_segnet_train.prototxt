@@ -5,7 +5,7 @@ layer {
   top: "data"
   top: "label"
   dense_image_data_param {
-    source: "/home/sahbi/Projects/SegNet/ISBI/train.txt"
+    source: "/home/ubuntu/data/DL8803/SegNet/ISBI/train.txt"
     batch_size: 1
     shuffle: true
   }
