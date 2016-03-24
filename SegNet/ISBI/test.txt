@@ -1,2 +1,2 @@
-/home/sahbi/Projects/SegNet/ISBI/test/ISIC_0000016.jpg /home/sahbi/Projects/SegNet/ISBI/testannot/ISIC_0000016_Segmentation.png
-/home/sahbi/Projects/SegNet/ISBI/test/ISIC_0000011.jpg /home/sahbi/Projects/SegNet/ISBI/testannot/ISIC_0000011_Segmentation.png
+/home/ubuntu/data/DL8803/SegNet/ISBI/test/ISIC_0000016.jpg /home/ubuntu/data/DL8803/SegNet/ISBI/testannot/ISIC_0000016_Segmentation.png
+/home/ubuntu/data/DL8803/SegNet/ISBI/test/ISIC_0000011.jpg /home/ubuntu/data/DL8803/SegNet/ISBI/testannot/ISIC_0000011_Segmentation.png
