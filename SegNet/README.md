@@ -78,10 +78,10 @@ cd /home/ubuntu/caffe-segnet/build/tools # change with your path to caffe-segnet
 ```bash
 # First
 # run test
-python /home/sahbi/Projects/SegNet/Scripts/compute_bn_statistics.py /home/sahbi/Projects/SegNet/Models/segnet_train.prototxt /home/sahbi/Projects/SegNet/Models/Training/segnet_iter_300.caffemodel /home/sahbi/Projects/SegNet/Models/Inference/
+python /home/ubuntu/DL8803/SegNet/Scripts/compute_bn_statistics.py /home/ubuntu/DL8803/SegNet/Models/segnet_train.prototxt /home/ubuntu/data/SegNet/Models/Training/segnet_iter_300.caffemodel /home/ubuntu/DL8803/SegNet/Models/Inference/
 # Then
 # visualize and compute accuracy
-python /home/sahbi/Projects/SegNet/Scripts/test_segmentation_isbi.py --model /home/sahbi/Projects/SegNet/Models/segnet_inference.prototxt --weights /home/sahbi/Projects/SegNet/Models/Inference/test_weights.caffemodel
+python /home/ubuntu/DL8803/Projects/SegNet/Scripts/test_segmentation_isbi.py --model /home/ubuntu/DL8803/SegNet/Models/segnet_inference.prototxt --weights /home/ubuntu/data/SegNet/Models/Inference/test_weights.caffemodel
 --iter 2 #number of test images to test
 ```
 
