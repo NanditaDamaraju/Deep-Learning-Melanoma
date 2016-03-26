@@ -85,6 +85,10 @@ python /home/ubuntu/DL8803/SegNet/Scripts/test_segmentation_isbi.py --model /hom
 ```
 
 ### Troubleshooting:
+-While running on AWS, if you get a INVALID display error. Try adding the following line to the python script after the matplotlib import. Refer to this [issue](https://github.com/matplotlib/matplotlib/issues/3466) for more
+```
+plt.switch_backend('agg')
+```
 
 - I think that it's also a boost 1.6 bug, but I had to do the following [fix](https://github.com/BVLC/caffe/pull/3575/files)
 
