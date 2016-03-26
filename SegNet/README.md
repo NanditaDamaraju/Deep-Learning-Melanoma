@@ -68,9 +68,9 @@ it resizes to 25% of the original size (*mogrify* replaces the images)
 - To train run:
 
 ```bash
-cd /Programs/caffe-segnet/build/tools # change with your path to caffe-segnet
+cd /home/ubuntu/caffe-segnet/build/tools # change with your path to caffe-segnet
 # run training
-./caffe train -gpu 0 -solver /home/sahbi/Projects/SegNet/Models/segnet_solver.prototxt -weights ~/Projects/SegNet/Models/VGG_ILSVRC_16_layers.caffemodel
+./caffe train -gpu 0 -solver /home/ubuntu/DL8803/SegNet/Models/segnet_solver.prototxt -weights /home/ubuntu/data/SegNet/Models/VGG_ILSVRC_16_layers.caffemodel
 ```
 
 - To test:
