@@ -1,14 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-plt.switch_backend('agg')
-
 import os.path
 import json
 import scipy
 import argparse
 import math
 import pylab
-import cv2
 from sklearn.preprocessing import normalize
 from sklearn.metrics import jaccard_similarity_score
 caffe_root = '/home/ubuntu/caffe-segnet/' 			# Change this to the absolute directoy to SegNet Caffe
@@ -24,7 +21,7 @@ parser.add_argument('--weights', type=str, required=True)
 parser.add_argument('--iter', type=int, required=True)
 args = parser.parse_args()
 
-caffe.set_mode_gpu()
+# caffe.set_mode_gpu()
 
 net = caffe.Net(args.model,
                 args.weights,
@@ -33,7 +30,7 @@ net = caffe.Net(args.model,
 scores=[]
 
 for i in range(0, args.iter):
-#for i in range(0,1):
+
 	net.forward()
 
 	image = net.blobs['data'].data
@@ -43,8 +40,7 @@ for i in range(0, args.iter):
 	image = np.squeeze(image[0,:,:,:])
 	label = np.squeeze(label[0,:,:,:])
 	output = np.squeeze(predicted[0,:,:,:])
-	ind = np.argmax(output, axis=0)	
-	#print output, ind[ind>0]
+	ind = np.argmax(output, axis=0)
 
 	r = ind.copy()
 	g = ind.copy()
@@ -80,34 +76,28 @@ for i in range(0, args.iter):
 	output = np.transpose(output, (1,2,0))
 	image = image[:,:,(2,1,0)]
 
-	error_image = np.zeros((ind.shape[0], ind.shape[1], 3))
-	diff_image = label -ind 
-	#TruePositive
-	#error_image[] = [ 0, 48,255]
-	#error_image[label ==1] = [255, 0 , 176]
-	error_image[diff_image > 0] = [178,255,102]
-        error_image[diff_image < 0] = [255, 51,51]
 	# print image.shape,rgb_gt.shape,rgb.shape
 	#scipy.misc.toimage(rgb, cmin=0.0, cmax=255).save(IMAGE_FILE+'_segnet.png')
 
+	# plt.figure()
+	# plt.imshow(image,vmin=0, vmax=1)
+	# plt.figure()
+	# plt.imshow(rgb_gt,vmin=0, vmax=1)
+	# plt.figure()
+	# plt.imshow(rgb,vmin=0, vmax=1)
+	# plt.show()
 
-
-	plt.figure()
-	plt.imsave("/home/ubuntu/images/" + str(i) + "o.png", image,vmin=0, vmax=1)
-	#plt.figure()
-	#plt.imshow(rgb_gt,vmin=0, vmax=1)
-	plt.figure()
-	plt.imsave("/home/ubuntu/images/" + str(i) + "h.png", error_image)
-	#plt.imshow(rgb,vmin=0, vmax=1)
-	plt.show()
+	# print rgb.shape,rgb_gt.shape
 
 	y_true = label.flatten()
 	y_pred = ind.flatten()
 
 	score = jaccard_similarity_score(y_true, y_pred)
 	scores.append(score)
-	print "image ",i," score: ",score
+	# print "image ",i," score: ",score
 
 
-print 'Success!'
 print "mean accuracy: ",np.array(scores).mean()
+
+with open("/home/ubuntu/DL8803/SegNet/test_error.txt","a") as file:
+	file.write(str(np.array(scores).mean())+"\n")

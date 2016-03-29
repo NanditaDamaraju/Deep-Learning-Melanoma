@@ -2,13 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.switch_backend('agg')
 
+import operator
 import os.path
 import json
 import scipy
 import argparse
 import math
 import pylab
-import cv2
 from sklearn.preprocessing import normalize
 from sklearn.metrics import jaccard_similarity_score
 caffe_root = '/home/ubuntu/caffe-segnet/' 			# Change this to the absolute directoy to SegNet Caffe
@@ -39,12 +39,54 @@ for i in range(0, args.iter):
 	image = net.blobs['data'].data
 	label = net.blobs['label'].data
 	predicted = net.blobs['prob'].data
-
+	predicted2 = net.blobs['conv1_1_D'].data
+	print predicted.shape
+	print predicted2.shape	
+	xshape = 192
+	yshape = 256
+	kernal = 2
 	image = np.squeeze(image[0,:,:,:])
 	label = np.squeeze(label[0,:,:,:])
 	output = np.squeeze(predicted[0,:,:,:])
-	ind = np.argmax(output, axis=0)	
-	#print output, ind[ind>0]
+	ind = np.argmax(output, axis=0)
+	y  = [[0] * xshape for i in range(yshape)]
+	output3 = np.squeeze(predicted2[0,1,:,:])
+	output3 = [[(x - x) for x in row] for row in output3]
+	for mindex in range(1,kernal):
+		output2 = np.squeeze(predicted2[0,mindex,:,:])	
+		xyz = zip(*output2)
+		mymax = max(map(max,xyz))
+		mymin = min(map(min,xyz))
+		xyz = zip(*output2)
+		mymax = max(map(max,xyz))
+		mymin = min(map(min,xyz))
+		output2 = [[(x - mymin) for x in row] for row in output2]
+		if mymax != 0:
+	        	output2 = [[(x/mymax) for x in row] for row in output2]
+        	output2 = [[int(math.floor(x*255)) for x in row] for row in output2]
+		for i1 in range(1,xshape):
+			for j1 in range(1,yshape):
+				output3[i1][j1]+=output2[i1][j1]
+
+
+
+#		output3 = [x + y for x, y in zip(output3, output2)]
+#		output3 = map(operator.add, output3, output2)
+	#print max(output2.any())
+#	for i in range(1,192):
+#		for j in range(1,256):
+#			print output2[i,j]
+#
+#
+
+#	xyz = zip(*output2)
+#	mymax = max(map(max,xyz))
+#	mymin = min(map(min,xyz))
+#	#output2[:,:] = [x - mymin for x in output2,x - mymin for x in output2] 
+#	output2 = [[(x - mymin) for x in row] for row in output2]
+#	output2 = [[(x/mymax) for x in row] for row in output2]
+	output3 = [[int(math.floor(x/kernal)) for x in row] for row in output3]
+	print output2
 
 	r = ind.copy()
 	g = ind.copy()
@@ -52,6 +94,9 @@ for i in range(0, args.iter):
 	r_gt = label.copy()
 	g_gt = label.copy()
 	b_gt = label.copy()
+	r2 = output3
+	g2 = output3
+	b2 = output3
 
 	Skin = [0,0,0]
 	Lesion = [255,255,255]
@@ -73,33 +118,28 @@ for i in range(0, args.iter):
 	rgb_gt[:,:,0] = r_gt/255.0
 	rgb_gt[:,:,1] = g_gt/255.0
 	rgb_gt[:,:,2] = b_gt/255.0
-
+	rgb2 = np.zeros((xshape, yshape, 3))
+	rgb2[:,:,0] = r2
+	rgb2[:,:,1] = g2
+	rgb2[:,:,2] = b2
 	image = image/255.0
 
 	image = np.transpose(image, (1,2,0))
 	output = np.transpose(output, (1,2,0))
 	image = image[:,:,(2,1,0)]
 
-	error_image = np.zeros((ind.shape[0], ind.shape[1], 3))
-	diff_image = label -ind 
-	#TruePositive
-	#error_image[] = [ 0, 48,255]
-	#error_image[label ==1] = [255, 0 , 176]
-	error_image[diff_image > 0] = [178,255,102]
-        error_image[diff_image < 0] = [255, 51,51]
 	# print image.shape,rgb_gt.shape,rgb.shape
 	#scipy.misc.toimage(rgb, cmin=0.0, cmax=255).save(IMAGE_FILE+'_segnet.png')
 
-
-
 	plt.figure()
-	plt.imsave("/home/ubuntu/images/" + str(i) + "o.png", image,vmin=0, vmax=1)
-	#plt.figure()
-	#plt.imshow(rgb_gt,vmin=0, vmax=1)
+	plt.imsave("out1.png", image, vmin=0, vmax=1)
 	plt.figure()
-	plt.imsave("/home/ubuntu/images/" + str(i) + "h.png", error_image)
-	#plt.imshow(rgb,vmin=0, vmax=1)
-	plt.show()
+	plt.imsave("out2.png", rgb_gt,vmin=0, vmax=1)
+	plt.figure()
+	plt.imsave("out3.png", rgb, vmin=0, vmax=1)
+	plt.figure()
+	plt.imsave("out4.png", rgb2)
+	#plt.show()
 
 	y_true = label.flatten()
 	y_pred = ind.flatten()
