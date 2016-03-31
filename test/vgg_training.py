@@ -66,27 +66,30 @@ train_yes_layer = [
     	Dropout(0.5),
     	Dense(4096, activation='relu'),
     	Dropout(0.5),
-    	Dense(1000, activation='relu'),
-    	Dense(2, activation='softmax',init='uniform'),
-    ]
+    	Dense(1000, activation='softmax')
+	]  	
+
 
     #return model
 for l in train_no_layer + train_yes_layer:
     	model.add(l)
 
-for l in train_no_layer:
-	l.trainable = False
+#for l in train_no_layer:
+#	l.trainable = False
 
 model.load_weights('/home/ubuntu/data/Phase3/Weights/vgg16_weights.h5')
    # model.load_weights()
+model.layers.pop()
+model.layers.pop()
+model.add(Dense(2, activation='softmax'))
 
-sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(optimizer=sgd, loss='categorical_crossentropy')
+sgd = SGD(lr=0.001, decay=1e-6, momentum=0.1, nesterov=False)
+model.compile(optimizer=sgd, loss='mse')
 
 print "Model Building Finished"    
 
 ######################### Training #####################################
-model.fit(im2, TrLabel, nb_epoch=200, batch_size=8)
+model.fit(im2, TrLabel, nb_epoch=20, batch_size=8, shuffle=True, validation_split=0.1, show_accuracy=True, verbose=1)
 json_string = model.to_json()
 f3 = open('/home/ubuntu/data/Phase3/Model/model_architecture.json', 'w')
 f3.write(json_string)
