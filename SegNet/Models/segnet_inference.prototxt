@@ -5,7 +5,7 @@ layer {
   top: "data"
   top: "label"
   dense_image_data_param {
-    source: "/home/ubuntu/DL8803/SegNet/ISBI/test_new.txt"	# Change this to the absolute path to your data file
+    source: "/home/ubuntu/DL8803/SegNet/ISBI/test_ISBI.txt"	# Change this to the absolute path to your data file
     batch_size: 1
   }
 }

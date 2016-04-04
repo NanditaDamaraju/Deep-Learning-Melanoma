@@ -89,7 +89,7 @@ model.compile(optimizer=sgd, loss='mse')
 print "Model Building Finished"    
 
 ######################### Training #####################################
-model.fit(im2, TrLabel, nb_epoch=20, batch_size=8, shuffle=True, validation_split=0.1, show_accuracy=True, verbose=1)
+model.fit(im2, TrLabel, nb_epoch=20, batch_size=8, shuffle=True, validation_split=0.2, show_accuracy=True, verbose=1)
 json_string = model.to_json()
 f3 = open('/home/ubuntu/data/Phase3/Model/model_architecture.json', 'w')
 f3.write(json_string)

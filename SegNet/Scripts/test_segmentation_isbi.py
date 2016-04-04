@@ -32,8 +32,17 @@ net = caffe.Net(args.model,
 
 scores=[]
 
+image_names = []
+
+for line in open("/home/ubuntu/DL8803/SegNet/ISBI/test_ISBI.txt"):
+	image_names.append(line.strip().split('\t')[1].split('/')[-1])
+
+print image_names
+
+print caffe.TEST
+	
 for i in range(0, args.iter):
-#for i in range(0,1):
+#for i in range(0,6):
 	net.forward()
 
 	image = net.blobs['data'].data
@@ -80,26 +89,22 @@ for i in range(0, args.iter):
 	output = np.transpose(output, (1,2,0))
 	image = image[:,:,(2,1,0)]
 
-	error_image = np.zeros((ind.shape[0], ind.shape[1], 3))
-	diff_image = label -ind 
-	#TruePositive
-	#error_image[] = [ 0, 48,255]
-	#error_image[label ==1] = [255, 0 , 176]
-	error_image[diff_image > 0] = [178,255,102]
-        error_image[diff_image < 0] = [255, 51,51]
+	
 	# print image.shape,rgb_gt.shape,rgb.shape
 	#scipy.misc.toimage(rgb, cmin=0.0, cmax=255).save(IMAGE_FILE+'_segnet.png')
 
 
 
-	plt.figure()
-	plt.imsave("/home/ubuntu/images/" + str(i) + "o.png", image,vmin=0, vmax=1)
+	#plt.figure()
+	#plt.imsave("/home/ubuntu/images/" + str(i) + "o.png", image,vmin=0, vmax=1)
 	#plt.figure()
 	#plt.imshow(rgb_gt,vmin=0, vmax=1)
 	plt.figure()
-	plt.imsave("/home/ubuntu/images/" + str(i) + "h.png", error_image)
+	plt.imsave("/home/ubuntu/data/SegNet/ISBI/test_ISBI/" + image_names[i], rgb)
+#	plt.imsave("/home/ubuntu/data/SegNet/ISBI/test_output/" + image_names[i].split('.')[0] + '_original.png', image)
 	#plt.imshow(rgb,vmin=0, vmax=1)
-	plt.show()
+	#plt.show()	
+	plt.close()
 
 	y_true = label.flatten()
 	y_pred = ind.flatten()

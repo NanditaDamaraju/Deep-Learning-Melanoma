@@ -6,10 +6,10 @@ base_lr: 0.01
 lr_policy: "step"
 gamma: 1.0
 stepsize: 10000000
-display: 10
+display: 20
 momentum: 0.9
 max_iter: 401
 weight_decay: 0.001
-snapshot: 10
+snapshot:100
 snapshot_prefix: "/home/ubuntu/data/SegNet/Models/Training/segnet"  	# Change this to the absolute path to where you wish to output solver snapshots
-solver_mode: CPU
+solver_mode: GPU

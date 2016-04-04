@@ -5,8 +5,8 @@ layer {
   top: "data"
   top: "label"
   dense_image_data_param {
-    source: "/home/ubuntu/DL8803/SegNet/ISBI/train_new.txt"	# Change this to the absolute path to your data file
-    batch_size: 8  # Change this number to a batch size that will fit on your GPU
+    source: "/home/ubuntu/DL8803/SegNet/ISBI/train_supplemented.txt"	# Change this to the absolute path to your data file
+    batch_size: 7  # Change this number to a batch size that will fit on your GPU
     shuffle: true
   }
 }

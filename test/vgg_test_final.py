@@ -18,7 +18,7 @@ f1.close()
 ######################## Loading Deep Model #################################
 f3 = open('/home/ubuntu/data/Phase3/Model/model_architecture.json')
 model = model_from_json(f3.read())
-model.load_weights('/home/ubuntu/data/Phase3/Weights/my_model_weights.h5')
+model.load_weights('/home/ubuntu/data/Phase3/Weights/weights_best_2.hdf5')
 f3.close()
 proba = model.predict_proba(im2, batch_size=16)
 pickle.dump(proba,f2)
