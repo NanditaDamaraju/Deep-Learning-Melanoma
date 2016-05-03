@@ -1,3 +1,5 @@
+#Files Changed
+All files in scripts, ISBI, segnet_* in Models
 # SegNet
 
 The algorithm used for segmentation is SegNet (Nov 2015), I followed the instruction of the tutorial on their website to set it up:
@@ -68,9 +70,9 @@ it resizes to 25% of the original size (*mogrify* replaces the images)
 - To train run:
 
 ```bash
-cd /Programs/caffe-segnet/build/tools # change with your path to caffe-segnet
+cd /home/ubuntu/caffe-segnet/build/tools # change with your path to caffe-segnet
 # run training
-./caffe train -gpu 0 -solver /home/sahbi/Projects/SegNet/Models/segnet_solver.prototxt -weights ~/Projects/SegNet/Models/VGG_ILSVRC_16_layers.caffemodel
+./caffe train -gpu 0 -solver /home/ubuntu/DL8803/SegNet/Models/segnet_solver.prototxt -weights /home/ubuntu/data/SegNet/Models/VGG_ILSVRC_16_layers.caffemodel
 ```
 
 - To test:
@@ -78,14 +80,17 @@ cd /Programs/caffe-segnet/build/tools # change with your path to caffe-segnet
 ```bash
 # First
 # run test
-python /home/sahbi/Projects/SegNet/Scripts/compute_bn_statistics.py /home/sahbi/Projects/SegNet/Models/segnet_train.prototxt /home/sahbi/Projects/SegNet/Models/Training/segnet_iter_300.caffemodel /home/sahbi/Projects/SegNet/Models/Inference/
+python /home/ubuntu/DL8803/SegNet/Scripts/compute_bn_statistics.py /home/ubuntu/DL8803/SegNet/Models/segnet_train.prototxt /home/ubuntu/data/SegNet/Models/Training/segnet_iter_300.caffemodel /home/ubuntu/DL8803/SegNet/Models/Inference/
 # Then
 # visualize and compute accuracy
-python /home/sahbi/Projects/SegNet/Scripts/test_segmentation_isbi.py --model /home/sahbi/Projects/SegNet/Models/segnet_inference.prototxt --weights /home/sahbi/Projects/SegNet/Models/Inference/test_weights.caffemodel
---iter 2 #number of test images to test
+python /home/ubuntu/DL8803/SegNet/Scripts/test_segmentation_isbi.py --model /home/ubuntu/DL8803/SegNet/Models/segnet_inference.prototxt --weights /home/ubuntu/data/SegNet/Models/Inference/test_weights.caffemodel --iter 2 #number of test images to test
 ```
 
 ### Troubleshooting:
+- While running on AWS, if you get a INVALID display error. Try adding the following line to the python script after the matplotlib import. Refer to this [issue](https://github.com/matplotlib/matplotlib/issues/3466) for more
+```
+plt.switch_backend('agg')
+```
 
 - I think that it's also a boost 1.6 bug, but I had to do the following [fix](https://github.com/BVLC/caffe/pull/3575/files)
 
