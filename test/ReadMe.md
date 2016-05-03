@@ -2,7 +2,7 @@ Deep Learning for Skin Cancer Detection.
 
 This file explains all classification codes, including their requirements and running procedure.
 
-Taining Instructions:
+Training Instructions:
 Step 1. "python parsing_train_data.py"
   Requires training images and Ground truth labels to be stored at specific location (see code) as in format provided by ISBI Challenge 2016.
   Stores Parsed training set and ground truths in .txt format.
