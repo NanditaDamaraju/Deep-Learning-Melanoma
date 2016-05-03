@@ -1,3 +1,5 @@
+#Files Changed
+All files in scripts, ISBI, segnet_* in Models
 # SegNet
 
 The algorithm used for segmentation is SegNet (Nov 2015), I followed the instruction of the tutorial on their website to set it up:
