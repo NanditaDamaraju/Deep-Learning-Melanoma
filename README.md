@@ -1,7 +1,5 @@
-# DL8803
-## A Deep Learning Approach
 
-## For Melanoma Detection
+## Deep Learning For Melanoma Detection
 
 | Mohit Agarwal | Nandita Damaraju | Sahbi Chaieb |
 | --- | --- | --- |
